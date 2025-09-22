@@ -161,6 +161,7 @@ const NFTInteract = createLazyComponent(() =>
   <ComponentLoadingSpinner />
 );
 
+
 // 🎯 MAIN APP COMPONENT
 function App() {
   return (
