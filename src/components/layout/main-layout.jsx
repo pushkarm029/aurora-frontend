@@ -1,10 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./header/header";
 import Sidebar from "./Sidebar";
+
+// Enhanced loading component for main content
+const MainContentLoader = () => (
+  <div className="flex-1 flex items-center justify-center bg-[#0d1117]">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+      <div className="text-gray-400 text-sm">Loading content...</div>
+    </div>
+  </div>
+);
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -53,7 +63,9 @@ const MainLayout = () => {
 
         <main className="flex-1 overflow-y-auto">
           <div className="w-full">
-            <Outlet />
+            <Suspense fallback={<MainContentLoader />}>
+              <Outlet />
+            </Suspense>
           </div>
         </main>
 
